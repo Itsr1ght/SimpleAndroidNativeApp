@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.nativeapp">
+    <uses-feature android:glEsVersion="0x00030000" android:required="true" />
+    <application
+        android:hasCode="false"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="Native C++ App"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true">
+        <activity
+            android:name="android.app.NativeActivity"
+            android:label="Native C++ App"
+            android:theme="@android:style/Theme.DeviceDefault.NoActionBar.Fullscreen"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleTask"
+            android:screenOrientation="fullSensor"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="native_app" /> 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>
