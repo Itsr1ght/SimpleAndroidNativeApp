@@ -3,15 +3,15 @@ plugins {
 }
 
 android {
-    namespace 'com.example.nativeapp'
-    compileSdk 34
+    namespace = 'com.example.nativeapp'
+    compileSdk = 34
 
     defaultConfig {
-        applicationId "com.example.nativeapp"
-        minSdk 21
-        targetSdk 34
-        versionCode 1
-        versionName "1.0"
+        applicationId = "com.example.nativeapp"
+        minSdk = 21
+        targetSdk = 34
+        versionCode = 1
+        versionName = "1.0"
         
         ndk {
             // Specify the ABI configurations you want to build
@@ -28,20 +28,20 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled = false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
     
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
     
     externalNativeBuild {
         cmake {
-            path "src/main/cpp/CMakeLists.txt"
-            version "3.22.1"
+            path = "src/main/cpp/CMakeLists.txt"
+            version = "3.22.1"
         }
     }
     
@@ -51,8 +51,4 @@ android {
             java.srcDirs = []
         }
     }
-}
-
-dependencies {
-    // No Java dependencies required for native-only app
 }
