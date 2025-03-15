@@ -10,7 +10,7 @@
         android:supportsRtl="true">
         <activity
             android:name="android.app.NativeActivity"
-            android:label="Native C++ App"
+            android:label="NativeCppApp"
             android:theme="@android:style/Theme.DeviceDefault.NoActionBar.Fullscreen"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:launchMode="singleTask"
