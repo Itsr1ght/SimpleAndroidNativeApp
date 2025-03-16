@@ -1,5 +1,5 @@
 # SimpleAndroidNativeApp
-android native app project to develop stuff in cpp
+a simple android native opengl3 project in cpp without using java or kotlin
 
 
 ## Build Instruction
