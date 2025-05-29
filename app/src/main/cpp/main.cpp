@@ -3,7 +3,6 @@
 #include <GLES3/gl3.h>
 #include <android/log.h>
 #include <stdlib.h>
-#include <cmath>
 #include <memory>
 
 #define LOG_TAG "RealNativeApp"
