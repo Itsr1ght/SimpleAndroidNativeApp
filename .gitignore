@@ -2,3 +2,5 @@
 build
 .cxx
 .gradle
+/local.properties
+/.idea/
