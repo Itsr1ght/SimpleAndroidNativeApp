@@ -288,19 +288,21 @@ private:
     
     void onAppCmd(int32_t cmd) {
         switch (cmd) {
-            case APP_CMD_INIT_WINDOW:
+            case APP_CMD_INIT_WINDOW: {
                 if (mApp->window != nullptr) {
                     mRenderer = std::make_unique<EGLRenderer>(mApp);
                     mRenderer->initialize();
                 }
                 break;
+            }
                 
-            case APP_CMD_TERM_WINDOW:
-                if (mRenderer) {
-                    mRenderer->cleanup();
-                    mRenderer.reset();
+            case APP_CMD_TERM_WINDOW: {
+                    if (mRenderer) {
+                        mRenderer->cleanup();
+                        mRenderer.reset();
+                    }
+                    break;
                 }
-                break;
         }
     }
     
