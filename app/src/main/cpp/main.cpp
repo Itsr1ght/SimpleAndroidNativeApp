@@ -2,7 +2,7 @@
 #include <EGL/egl.h>
 #include <GLES3/gl3.h>
 #include <android/log.h>
-#include <stdlib.h>
+#include <cstdlib>
 #include <memory>
 
 #define LOG_TAG "RealNativeApp"
@@ -23,7 +23,7 @@ namespace Shaders {
     precision mediump float;
     out vec4 FragColor;
     void main() {
-        FragColor = vec4(1.0, 1.0, 1.0, 1.0);
+        FragColor = vec4(0.0, 1.0, 0.0, 1.0);
     })";
 }
 
@@ -32,7 +32,7 @@ class ShaderProgram {
 private:
     GLuint mProgramId = 0;
 
-    GLuint compileShader(GLenum type, const char* source) {
+    static GLuint compileShader(GLenum type, const char* source) {
         GLuint shader = glCreateShader(type);
         glShaderSource(shader, 1, &source, nullptr);
         glCompileShader(shader);
@@ -90,10 +90,6 @@ public:
     void use() const {
         glUseProgram(mProgramId);
     }
-
-    GLuint getProgramId() const {
-        return mProgramId;
-    }
 };
 
 // Triangle mesh class
@@ -122,7 +118,7 @@ public:
         glBindVertexArray(mVAO);
         glBindBuffer(GL_ARRAY_BUFFER, mVBO);
         glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
         glEnableVertexAttribArray(0);
         glBindVertexArray(0);
         
@@ -159,7 +155,7 @@ private:
     TriangleMesh mTriangle;
     
 public:
-    EGLRenderer(android_app* app) : mApp(app) {}
+    explicit EGLRenderer(android_app* app) : mApp(app) {}
     
     ~EGLRenderer() {
         cleanup();
@@ -236,7 +232,7 @@ public:
             return;
         }
         
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
         mShaderProgram.use();
@@ -269,7 +265,8 @@ public:
 
         LOG_INFO("Renderer cleaned up");
     }
-    
+
+    [[nodiscard]]
     bool isInitialized() const {
         return mDisplay != EGL_NO_DISPLAY;
     }
@@ -303,11 +300,12 @@ private:
                     }
                     break;
                 }
+            default: {}
         }
     }
     
 public:
-    NativeApp(android_app* app) : mApp(app) {
+    explicit NativeApp(android_app* app) : mApp(app) {
         mApp->userData = this;
         mApp->onAppCmd = handleAppCommand;
     }
@@ -331,6 +329,7 @@ public:
     }
 };
 
+[[maybe_unused]]
 void android_main(android_app* app) {
     NativeApp nativeApp(app);
     nativeApp.run();
